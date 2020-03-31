@@ -47,12 +47,17 @@ def _merged(xs, ys, cmp=cmp_standard):
     Runs in linear time.
     '''
     if len(xs)>0 and len(ys)>0:
-        a = xs[len(xs)-1]
-        b = ys[0]
-        if cmp(a,b)==1:
-            return ys+xs
-        else:
-            return xs+ys
+        y = xs+ys
+        x =1
+        while x<=len(y):
+            for index in range(len(y)-1):
+                a = y[index]
+                b = y[index+1]
+                if cmp(a,b)==1:
+                    y[index]=b
+                    y[index+1]=a
+            x+=1
+        return y
     return xs+ys
 
 def merge_sorted(xs, cmp=cmp_standard):
