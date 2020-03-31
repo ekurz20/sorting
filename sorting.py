@@ -77,11 +77,14 @@ def merge_sorted(xs, cmp=cmp_standard):
                     left[index]=b
                     left[index+1]=a
             x+=1
-        a = left[len(left)-1]
-        b = right[0]
-        if cmp(a,b)==1:
-            left[len(left)-1]=b
-            right[0]=a
+        z=1
+        while z<=2:
+            a = left[len(left)-1]
+            b = right[0]
+            if cmp(a,b)==1:
+                left[len(left)-1]=b
+                right[0]=a
+            z+=1
         y=1
         while y<=len(right):
             for index in range(len(right)-1):
