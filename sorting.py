@@ -46,10 +46,10 @@ def _merged(xs, ys, cmp=cmp_standard):
     and returns a new list containing the elements of both xs and ys.
     Runs in linear time.
     '''
-    a = xs[len(xs-1)]
+    a = xs[len(xs)-1]
     b = ys[0]
     if cmp(a,b)==1:
-        xs[len(xs-1)]=b
+        xs[len(xs)-1]=b
         ys[0]=a
     return xs+ys
 
