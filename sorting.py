@@ -46,7 +46,7 @@ def _merged(xs, ys, cmp=cmp_standard):
     and returns a new list containing the elements of both xs and ys.
     Runs in linear time.
     '''
-
+    return xs+ys
 
 def merge_sorted(xs, cmp=cmp_standard):
     '''
@@ -63,7 +63,35 @@ def merge_sorted(xs, cmp=cmp_standard):
 
     You should return a sorted version of the input list xs
     '''
-
+    if len(xs)==1:
+        return xs
+    else:
+        left = xs[0:int(len(xs)/2)]
+        right = xs[int(len(xs)/2):len(xs)]
+        x=1
+        while x<=len(left):
+            for index in range(len(left)-1):
+                a=left[index]
+                b=left[index+1]
+                if cmp(a,b)==1:
+                    left[index]=b
+                    left[index+1]=a
+            x+=1
+        a = left[len(left)-1]
+        b = right[0]
+        if cmp(a,b)==1:
+            left[len(left)-1]=b
+            right[0]=a
+        y=1
+        while y<=len(right):
+            for index in range(len(right)-1):
+                a = right[index]
+                b = right[index+1]
+                if cmp(a,b)==1:
+                    right[index]=b
+                    right[index+1]=a
+            y+=1
+        return left+right
 
 def quick_sorted(xs, cmp=cmp_standard):
     '''
