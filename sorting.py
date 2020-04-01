@@ -136,49 +136,7 @@ def quick_sorted(xs, cmp=cmp_standard):
 
     You should return a sorted version of the input list xs
     '''
-    if len(xs)==1:
-        return xs
-    else:
-        pindex = randint(0,len(xs)-1)
-        p = xs[pindex]
-        less = []
-        greater = []
-        count = []
-        count.append(p)
-        c = 0
-        for index in range(len(xs)-1):
-            a = xs[index]
-            if cmp(a,p)==1:
-                greater.append(xs[index])
-            if cmp(a,p)==-1:
-                less.append(xs[index])
-            if cmp(a,p)==0:
-                c+=1
-        if len(less)>1:
-            x=1
-            while x<=len(less):
-                for index in range(len(less)-1):
-                    a=less[index]
-                    b=less[index+1]
-                    if cmp(a,b)==1:
-                        less[index]=b
-                        less[index+1]=a
-                x+=1
-        if len(greater)>1:
-            x=1
-            while x<=len(greater):
-                for index in range(len(greater)-1):
-                    a=greater[index]
-                    b=greater[index+1]
-                    if cmp(a,b)==1:
-                        greater[index]=b
-                        greater[index+1]=a
-                x+=1
-        if c>0:
-            while c>0:
-                count.append(p)
-                c=c-1
-        return less+count+greater
+    quicksort(xs,0,len(xs)-1,cmp)
 
 
 def quick_sort(xs, cmp=cmp_standard):
@@ -193,3 +151,26 @@ def quick_sort(xs, cmp=cmp_standard):
     to implement quick_sort as an in-place algorithm.
     You should directly modify the input xs variable instead of returning a copy of the list.
     '''
+    quicksort(xs,0,len(xs)-1,cmp)
+
+def quicksort(arr, start, stop, cmp):
+    if start < stop:
+        pivotindex = partitionrand(arr, start, stop, cmp)
+        quicksort(arr, start, pivotindex -1, cmp)
+        quicksort(arr,pivotindex+1,stop, cmp)
+
+def partitionrand(arr, start, stop, cmp):
+    randpivot = random.randrange(start,stop)
+    arr[start],arr[randpivot] = arr[randpivot],arr[start]
+    return partition(arr,start,stop,cmp)
+
+def partition(arr,start,stop,cmp):
+    pivot = start
+    i = start + 1
+    for j in range(start+1,stop+1):
+        if cmp(arr[j],arr[pivot])==-1 or cmp(arr[j],arr[pivot])==0:
+            arr[i],arr[j]=arr[j],arr[i]
+            i=i+1
+    arr[pivot],arr[i-1] = arr[i-1],arr[pivot]
+    pivot = i-1
+    return pivot
