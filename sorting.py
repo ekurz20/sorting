@@ -160,7 +160,7 @@ def quicksort(arr, start, stop, cmp):
         quicksort(arr,pivotindex+1,stop, cmp)
 
 def partitionrand(arr, start, stop, cmp):
-    randpivot = random.randrange(start,stop)
+    randpivot = random.randint(start,stop)
     arr[start],arr[randpivot] = arr[randpivot],arr[start]
     return partition(arr,start,stop,cmp)
 
