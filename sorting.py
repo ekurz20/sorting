@@ -47,17 +47,30 @@ def _merged(xs, ys, cmp=cmp_standard):
     Runs in linear time.
     '''
     if len(xs)>0 and len(ys)>0:
-        y = xs+ys
-        x =1
-        while x<=len(y):
-            for index in range(len(y)-1):
-                a = y[index]
-                b = y[index+1]
-                if cmp(a,b)==1:
-                    y[index]=b
-                    y[index+1]=a
-            x+=1
-        return y
+        z = []
+        x = 0
+        y = 0
+        while x<=len(xs)-1 and y<=len(ys)-1:
+            if cmp(xs[x],ys[y])==0:
+                z.append(xs[x])
+                z.append(ys[y])
+                x+=1
+                y+=1
+            elif cmp(xs[x],ys[y])==1:
+                z.append(ys[y])
+                y+=1
+            elif cmp(xs[x]ys[y])==-1:
+                z.append(xs[x])
+                x+=1
+        if x > y:
+            z.append(ys[y])
+        if x < y:
+            z.append(xs[x])
+        if len(xs) > len(ys):
+            z.append(xs[len(xs)-1])
+        if len(ys) > len(xs):
+            z.append(ys[len(ys)-1])
+        return z
     return xs+ys
 
 def merge_sorted(xs, cmp=cmp_standard):
