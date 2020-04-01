@@ -62,14 +62,14 @@ def _merged(xs, ys, cmp=cmp_standard):
             elif cmp(xs[x],ys[y])==-1:
                 z.append(xs[x])
                 x+=1
-        if x > y:
-            z.append(ys[y])
-        if x < y:
-            z.append(xs[x])
-        if len(xs) > len(ys):
-            z.append(xs[len(xs)-1])
-        if len(ys) > len(xs):
-            z.append(ys[len(ys)-1])
+        if y!=len(ys):
+            while y!=len(ys):
+                z.append(ys[y])
+                y+=1
+        if x!=len(xs):
+            while x!=len(xs):
+                z.append(xs[x])
+                x+=1
         return z
     return xs+ys
 
@@ -91,35 +91,26 @@ def merge_sorted(xs, cmp=cmp_standard):
     if len(xs)==1 or len(xs)==0:
         return xs
     else:
-        z=1
-        while z<=len(xs):
-            left = xs[0:int(len(xs)/2)]
-            right = xs[int(len(xs)/2):len(xs)]
-            x=1
-            while x<=len(left):
-                for index in range(len(left)-1):
-                    a=left[index]
-                    b=left[index+1]
-                    if cmp(a,b)==1:
-                        left[index]=b
-                        left[index+1]=a
-                x+=1
-            a = left[len(left)-1]
-            b = right[0]
-            if cmp(a,b)==1:
-                left[len(left)-1]=b
-                right[0]=a
-            y=1
-            while y<=len(right):
-                for index in range(len(right)-1):
-                    a = right[index]
-                    b = right[index+1]
-                    if cmp(a,b)==1:
-                        right[index]=b
-                        right[index+1]=a
-                y+=1
-            z+=1
-        return left+right
+        left = xs[0:int(len(xs)/2)]
+        right = xs[int(len(xs)/2):len(xs)]
+        x=1
+        while x<=len(left):
+            for index in range(len(left)-1):
+                a=left[index]
+                b=left[index+1]
+                if cmp(a,b)==1:
+                    left[index]=b
+                    left[index+1]=a
+            x+=1
+        while y<=len(right):
+            for index in range(len(right)-1):
+                a = right[index]
+                b = right[index+1]
+                if cmp(a,b)==1:
+                    right[index]=b
+                    right[index+1]=a
+            y+=1
+        return _merged(left,right,cmp)
 
 def quick_sorted(xs, cmp=cmp_standard):
     '''
