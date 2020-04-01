@@ -136,7 +136,10 @@ def quick_sorted(xs, cmp=cmp_standard):
 
     You should return a sorted version of the input list xs
     '''
-    quicksort(xs,0,len(xs)-1,cmp)
+    if len(xs)==1 or len(xs)==0:
+        return xs
+    else:
+        quicksort(xs,0,len(xs)-1,cmp)
 
 
 def quick_sort(xs, cmp=cmp_standard):
