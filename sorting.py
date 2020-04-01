@@ -10,6 +10,8 @@ if cmp(a,b) returns  0, then a==b.
 '''
 
 import random
+from random import *
+
 
 def cmp_standard(a,b):
     '''
@@ -134,6 +136,49 @@ def quick_sorted(xs, cmp=cmp_standard):
 
     You should return a sorted version of the input list xs
     '''
+    if len(xs)==1:
+        return xs
+    else:
+        pindex = randint(0,len(xs)-1)
+        p = xs[pindex]
+        less = []
+        greater = []
+        count = []
+        count.append(p)
+        c = 0
+        for index in range(len(xs)-1):
+            a = xs[index]
+            if cmp(a,p)==1:
+                greater.append(xs[index])
+            if cmp(a,p)==-1:
+                less.append(xs[index])
+            if cmp(a,p)==0:
+                c+=1
+        if len(less)>1:
+            x=1
+            while x<=len(less):
+                for index in range(len(less)-1):
+                    a=less[index]
+                    b=less[index+1]
+                    if cmp(a,b)==1:
+                        less[index]=b
+                        less[index+1]=a
+                x+=1
+        if len(greater)>1:
+            x=1
+            while x<=len(greater):
+                for index in range(len(greater)-1):
+                    a=greater[index]
+                    b=greater[index+1]
+                    if cmp(a,b)==1:
+                        greater[index]=b
+                        greater[index+1]=a
+                x+=1
+        if c>0:
+            while c>0:
+                count.append(p)
+                c=c-1
+        return less+count+greater
 
 
 def quick_sort(xs, cmp=cmp_standard):
