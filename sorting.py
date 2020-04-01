@@ -59,7 +59,7 @@ def _merged(xs, ys, cmp=cmp_standard):
             elif cmp(xs[x],ys[y])==1:
                 z.append(ys[y])
                 y+=1
-            elif cmp(xs[x]ys[y])==-1:
+            elif cmp(xs[x],ys[y])==-1:
                 z.append(xs[x])
                 x+=1
         if x > y:
