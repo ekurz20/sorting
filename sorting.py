@@ -140,6 +140,7 @@ def quick_sorted(xs, cmp=cmp_standard):
         return xs
     else:
         quicksort(xs,0,len(xs)-1,cmp)
+        return xs
 
 
 def quick_sort(xs, cmp=cmp_standard):
