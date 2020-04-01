@@ -155,7 +155,11 @@ def quick_sort(xs, cmp=cmp_standard):
     to implement quick_sort as an in-place algorithm.
     You should directly modify the input xs variable instead of returning a copy of the list.
     '''
-    quicksort(xs,0,len(xs)-1,cmp)
+    if len(xs)==1 or len(xs)==0:
+        return xs
+    else:
+        quicksort(xs,0,len(xs)-1,cmp)
+        return xs
 
 def quicksort(arr, start, stop, cmp):
     if start < stop:
